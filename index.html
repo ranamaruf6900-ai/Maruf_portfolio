@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maruf Rana | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary-color: #0ef; /* Neon Cyan */
+            --bg-color: #1f242d;   /* Dark Grey */
+            --second-bg-color: #323946;
+            --text-color: #fff;
+            --main-font: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--main-font);
+        }
+
+        /* --- Animations --- */
+        @keyframes slideRight {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideTop {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideBottom {
+            0% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes floatImage {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-24px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* --- Header --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 9%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0;
+            animation: slideRight 1s ease forwards;
+        }
+
+        .navbar a {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-left: 3.5rem;
+            font-weight: 500;
+            transition: .3s;
+            opacity: 0;
+            animation: slideTop .5s ease forwards;
+            animation-delay: calc(.2s * var(--i));
+            display: inline-block;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            color: var(--primary-color);
+        }
+
+        /* --- Home Section --- */
+        section {
+            min-height: 100vh;
+            padding: 10rem 9% 2rem;
+        }
+
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .home-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            opacity: 0;
+            animation: slideBottom 1s ease forwards;
+            animation-delay: .7s;
+        }
+
+        .home-content h3:nth-of-type(2) {
+            margin-bottom: 2rem;
+            animation: slideTop 1s ease forwards;
+            animation-delay: .7s;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 10px 0;
+            opacity: 0;
+            animation: slideRight 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        span {
+            color: var(--primary-color);
+        }
+
+        .home-content p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideLeft 1s ease forwards;
+            animation-delay: 1s;
+            max-width: 600px;
+        }
+
+        .home-img img {
+            width: 35vw; /* Adjust based on your photo preference */
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary-color);
+            opacity: 0;
+            animation: floatImage 4s ease-in-out infinite;
+            animation-delay: 2s;
+            animation-fill-mode: backwards; /* Ensures opacity 0 before animation starts */
+            /* Placeholder styling */
+            background-color: #333; 
+        }
+        
+        /* To ensure image appears even if you don't have one yet */
+        .home-img {
+            opacity: 0;
+            animation: slideLeft 1s ease forwards;
+            animation-delay: 1.5s;
+        }
+
+        /* --- Skills Section --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .skill-box {
+            background: var(--second-bg-color);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: .5s;
+            flex: 1 1 200px;
+            max-width: 300px;
+        }
+
+        .skill-box:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        .skill-box h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* --- Project Section --- */
+        .heading {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--second-bg-color);
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            transition: 0.5s ease;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .project-card i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Contact Section --- */
+        .contact form {
+            max-width: 700px;
+            margin: 1rem auto;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact form .input-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .contact form .input-box input,
+        .contact form textarea {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            background: var(--second-bg-color);
+            border-radius: .8rem;
+            margin: .7rem 0;
+        }
+
+        .contact form .input-box input {
+            width: 49%;
+        }
+
+        .contact form textarea {
+            resize: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background: var(--primary-color);
+            border-radius: 4rem;
+            box-shadow: 0 0 1rem var(--primary-color);
+            font-size: 1rem;
+            color: var(--bg-color);
+            letter-spacing: .1rem;
+            font-weight: 600;
+            transition: .5s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            box-shadow: none;
+        }
+
+        /* --- Footer / Social Links --- */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 2rem 9%;
+            background: var(--second-bg-color);
+        }
+
+        .social-media a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 3rem;
+            height: 3rem;
+            background: transparent;
+            border: .2rem solid var(--primary-color);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 0 .5rem;
+            transition: .5s ease;
+        }
+
+        .social-media a:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 1rem var(--primary-color);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header { padding: 2rem 3%; }
+            section { padding: 10rem 3% 2rem; }
+            .home { flex-direction: column; }
+            .home-img img { width: 70vw; margin-top: 4rem; }
+            .contact form .input-box input { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">Portfolio.</a>
+
+        <nav class="navbar">
+            <a href="#home" class="active" style="--i:1;">Home</a>
+            <a href="#skills" style="--i:2;">Skills</a>
+            <a href="#projects" style="--i:3;">Projects</a>
+            <a href="#contact" style="--i:4;">Contact</a>
+        </nav>
+    </header>
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, It's Me</h3>
+            <h1>Maruf Rana</h1>
+            <h3>And I'm a <span>3rd Year BCA Student</span></h3>
+            <p>Passionate about building web applications and editing creative content. I am currently honing my skills in coding and database management.</p>
+            
+            <div class="social-media" style="margin-top: 20px; margin-bottom: 20px;">
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <a href="#contact" class="btn">Hire Me</a>
+        </div>
+
+        <div class="home-img">
+            
+            <img src="https://via.placeholder.com/400x400.png?text=Maruf+Photo" alt="Maruf Rana">
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <h2 class="heading">My <span>Skills</span></h2>
+        
+        <div class="skills-container">
+            <div class="skill-box">
+                <i class="fab fa-html5" style="font-size: 3rem; color: #e34c26;"></i>
+                <h4>HTML</h4>
+            </div>
+            <div class="skill-box">
+                <i class="fab fa-css3-alt" style="font-size: 3rem; color: #264de4;"></i>
+                <h4>CSS</h4>
+            </div>
+            <div class="skill-box">
+                <i class="fab fa-python" style="font-size: 3rem; color: #4584b6;"></i>
+                <h4>Python</h4>
+            </div>
+            <div class="skill-box">
+                <i class="fab fa-java" style="font-size: 3rem; color: #f89820;"></i>
+                <h4>Java</h4>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-database" style="font-size: 3rem; color: #00758f;"></i>
+                <h4>SQL</h4>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-video" style="font-size: 3rem; color: #a29bfe;"></i>
+                <h4>Editing</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2 class="heading">My <span>Projects</span></h2>
+
+        <div class="projects-container">
+            <div class="project-card">
+                <i class="fas fa-code"></i>
+                <h3>My Project 1</h3>
+                <p>A web-based application created using HTML, CSS, and Java.</p>
+                <a href="#" class="btn" style="margin-top: 1rem;">Read More</a>
+            </div>
+
+            <div class="project-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>My Project 2</h3>
+                <p>Database management system project using SQL and Python.</p>
+                <a href="#" class="btn" style="margin-top: 1rem;">Read More</a>
+            </div>
+
+            <div class="project-card">
+                <i class="fas fa-edit"></i>
+                <h3>Video Edit</h3>
+                <p>Showcase of basic video editing skills and creative cuts.</p>
+                <a href="#" class="btn" style="margin-top: 1rem;">Watch</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+
+        <form action="#">
+            <div class="input-box">
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email Address">
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Mobile Number">
+                <input type="text" placeholder="Email Subject">
+            </div>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <input type="submit" value="Send Message" class="btn">
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 by Maruf Rana | All Rights Reserved.</p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#home"><i class="fas fa-angle-up"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>
